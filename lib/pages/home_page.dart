@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: EdgeInsets.only(left: 10),
@@ -60,6 +61,31 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Breaking News",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const Text(
+                    "View All",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
             CarouselSlider.builder(
               itemCount: sliders.length,
               itemBuilder: (context, index, realImage) {
@@ -81,7 +107,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 30),
-            buildSmoothIndicator(),
+            Center(child: buildSmoothIndicator()),
           ],
         ),
       ),
