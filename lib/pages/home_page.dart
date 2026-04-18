@@ -5,6 +5,7 @@ import 'package:addis_news/services/data.dart';
 import 'package:addis_news/services/slider_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<CategoryModel> categories = [];
   List<SliderModel> sliders = [];
+  int activeIndex = 0;
 
   @override
   void initState() {
@@ -71,8 +73,15 @@ class _HomePageState extends State<HomePage> {
                 autoPlay: true,
                 enlargeCenterPage: true,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activeIndex = index;
+                  });
+                },
               ),
             ),
+            const SizedBox(height: 30),
+            buildSmoothIndicator(),
           ],
         ),
       ),
@@ -115,5 +124,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     ),
+  );
+
+  Widget buildSmoothIndicator() => AnimatedSmoothIndicator(
+    activeIndex: activeIndex,
+    count: sliders.length,
+    effect: ScrollingDotsEffect(dotWidth: 15, dotHeight: 15),
   );
 }
