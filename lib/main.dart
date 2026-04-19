@@ -1,4 +1,3 @@
-import 'package:addis_news/pages/home_page.dart';
 import 'package:addis_news/pages/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,4 +14,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// continue 43:00
+
