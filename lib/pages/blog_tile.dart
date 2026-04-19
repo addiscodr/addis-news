@@ -1,3 +1,4 @@
+import 'package:addis_news/pages/article_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -6,18 +7,25 @@ class BlogTile extends StatelessWidget {
   String imageUrl;
   String title;
   String description;
+  String url;
 
   BlogTile({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
+    required this.url,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)),
+        );
+      },
       child: Container(
         margin: EdgeInsets.only(bottom: 15),
         child: Padding(

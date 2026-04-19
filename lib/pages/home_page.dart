@@ -234,6 +234,7 @@ class _HomePageState extends State<HomePage> {
                         itemCount: articles.length,
                         itemBuilder: (context, index) {
                           return BlogTile(
+                            url: articles[index].url!,
                             imageUrl: articles[index].urlToImage!,
                             title: articles[index].title ?? "No Title",
                             description:
