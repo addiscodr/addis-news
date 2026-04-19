@@ -36,7 +36,10 @@ class _HomePageState extends State<HomePage> {
             const Text("ADDIS"),
             const Text(
               "NEWS",
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
