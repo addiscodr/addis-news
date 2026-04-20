@@ -2,6 +2,7 @@ import 'package:addis_news/models/article_model.dart';
 import 'package:addis_news/models/category_model.dart';
 import 'package:addis_news/models/slider_model.dart';
 import 'package:addis_news/pages/blog_tile.dart';
+import 'package:addis_news/pages/category_news.dart';
 import 'package:addis_news/pages/category_tile.dart';
 import 'package:addis_news/services/data.dart';
 import 'package:addis_news/services/news.dart';
@@ -29,27 +30,24 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     categories = getCategories();
-    getSlider();
-    getNews();
+    loadAllData(); // Use a single wrapper
   }
 
-  void getNews() async {
+  void loadAllData() async {
     News newsClass = News();
-    await newsClass.getNews();
-    articles = newsClass.news;
-    setState(() {
-      articles = newsClass.news;
-      loading = false;
-    });
-  }
+    Slider sliderClass = Slider();
 
-  void getSlider() async {
-    Slider slider = Slider();
-    await slider.getSlider();
-    sliders = slider.sliders;
-    setState(() {
-      sliders = slider.sliders;
-    });
+    // Wait for both network calls to finish
+    await Future.wait([newsClass.getNews(), sliderClass.getSlider()]);
+
+    if (mounted) {
+      // Check if user hasn't left the page
+      setState(() {
+        articles = newsClass.news;
+        sliders = sliderClass.sliders;
+        loading = false;
+      });
+    }
   }
 
   @override
@@ -86,14 +84,27 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
-                        return CategoryTile(
-                          image: categories[index].image.toString(),
-                          categoryName: categories[index].categoryName
-                              .toString(),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CategoryNews(
+                                  name: categories[index].categoryName!,
+                                ),
+                              ),
+                            );
+                          },
+                          child: CategoryTile(
+                            image: categories[index].image.toString(),
+                            categoryName: categories[index].categoryName
+                                .toString(),
+                          ),
                         );
                       },
                     ),
                   ),
+
                   const SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),

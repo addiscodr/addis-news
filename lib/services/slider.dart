@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:addis_news/models/slider_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,17 +21,21 @@ class Slider {
           sliders.clear(); // important to avoid duplicates
 
           for (var e in jsonData["articles"]) {
+            // Relaxed condition: as long as there is a title and a link, we can show it
+
             if (e["urlToImage"] != null && e["description"] != null) {
-              sliders.add(
-                SliderModel(
-                  author: e["author"],
-                  title: e["title"],
-                  description: e["description"],
-                  url: e["url"],
-                  urlToImage: e["urlToImage"],
-                  content: e["content"],
-                ),
-              );
+              if (e["title"] != null && e["urlToImage"] != null) {
+                sliders.add(
+                  SliderModel(
+                    author: e["author"] ?? "Trending",
+                    title: e["title"],
+                    description: e["description"] ?? "", // Fallback
+                    url: e["url"],
+                    urlToImage: e["urlToImage"], // Placeholder
+                    content: e["content"] ?? "",
+                  ),
+                );
+              }
             }
           }
         }

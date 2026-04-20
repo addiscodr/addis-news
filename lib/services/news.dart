@@ -9,27 +9,37 @@ class News {
   Future<void> getNews() async {
     try {
       final url = Uri.parse(
-        "https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=3ef354ae562f454690be120ea7da6a2f",
+        "https://newsapi.org/v2/top-headlines?q=tesla&sortBy=publishedAt&apiKey=3ef354ae562f454690be120ea7da6a2f",
       );
 
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
+        print("Total Results Found: ${jsonData['totalResults']}");
+        print("API Response Code: ${response.statusCode}");
+        print("API Response Body: ${response.body}");
 
         if (jsonData["status"] == "ok") {
           news.clear(); // important to avoid duplicates
 
+          // inside services/news.dart
           for (var e in jsonData["articles"]) {
-            if (e["urlToImage"] != null && e["description"] != null) {
+            // Only skip if the title or URL is missing (essential info)
+            if (e["title"] != null && e["url"] != null) {
               news.add(
                 ArticleModel(
-                  author: e["author"],
+                  author: e["author"] ?? "Addis News",
                   title: e["title"],
-                  description: e["description"],
+                  description:
+                      e["description"] ??
+                      "No description available for this article.",
                   url: e["url"],
-                  urlToImage: e["urlToImage"],
-                  content: e["content"],
+                  // Use a placeholder image if the API doesn't provide one
+                  urlToImage:
+                      e["urlToImage"] ??
+                      "https://images.unsplash.com/photo-1504711434969-e33886168f5c",
+                  content: e["content"] ?? "",
                 ),
               );
             }

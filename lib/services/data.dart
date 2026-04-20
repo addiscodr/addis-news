@@ -2,32 +2,36 @@ import 'package:addis_news/models/category_model.dart';
 
 List<CategoryModel> getCategories() {
   List<CategoryModel> category = [];
-  CategoryModel categoryModel = CategoryModel();
 
-  categoryModel.categoryName = "Business";
-  categoryModel.image = "assets/images/business.jpg";
-  category.add(categoryModel);
-  categoryModel = CategoryModel();
+  // Business
+  CategoryModel business = CategoryModel();
+  business.categoryName = "Business";
+  business.image = "assets/images/business.jpg";
+  category.add(business);
 
-  categoryModel.categoryName = "Entertainment";
-  categoryModel.image = "assets/images/entertainment.jpg";
-  category.add(categoryModel);
-  categoryModel = CategoryModel();
+  // Entertainment
+  CategoryModel entertainment = CategoryModel(); // New instance!
+  entertainment.categoryName = "Entertainment";
+  entertainment.image = "assets/images/entertainment.jpg";
+  category.add(entertainment);
 
-  categoryModel.categoryName = "General";
-  categoryModel.image = "assets/images/general.jpg";
-  category.add(categoryModel);
-  categoryModel = CategoryModel();
+  // General
+  CategoryModel general = CategoryModel(); // New instance!
+  general.categoryName = "General";
+  general.image = "assets/images/general.jpg";
+  category.add(general);
 
-  categoryModel.categoryName = "Health";
-  categoryModel.image = "assets/images/health.jpg";
-  category.add(categoryModel);
-  categoryModel = CategoryModel();
+  // Health
+  CategoryModel health = CategoryModel(); // New instance!
+  health.categoryName = "Health";
+  health.image = "assets/images/health.jpg";
+  category.add(health);
 
-  categoryModel.categoryName = "Sports";
-  categoryModel.image = "assets/images/sport.jpg";
-  category.add(categoryModel);
-  categoryModel = CategoryModel();
+  // Sport
+  CategoryModel sport = CategoryModel(); // New instance!
+  sport.categoryName = "Sports";
+  sport.image = "assets/images/sport.jpg";
+  category.add(sport);
 
   return category;
 }
