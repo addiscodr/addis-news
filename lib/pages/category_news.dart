@@ -62,7 +62,9 @@ class _CategoryNewsState extends State<CategoryNews> {
                   title: categories[index].title!,
                 );
               },
+              
             ),
+            
     );
   }
 }
