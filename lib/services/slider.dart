@@ -2,14 +2,16 @@ import 'dart:convert';
 
 import 'package:addis_news/models/slider_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Slider {
   List<SliderModel> sliders = [];
+  final String? apiKey = dotenv.env['NEWS_API_KEY'];
 
   Future<void> getSlider() async {
     try {
       final url = Uri.parse(
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=3ef354ae562f454690be120ea7da6a2f",
+        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=$apiKey",
       );
 
       final response = await http.get(url);

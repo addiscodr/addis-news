@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:addis_news/models/show_category_model.dart';
-
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ShowCategoryNews {
   List<ShowCategoryModel> categories = [];
+  final String? apiKey = dotenv.env['NEWS_API_KEY'];
 
   Future<void> getCategoriesNews(String category) async {
     final url = Uri.parse(
-      "https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=3ef354ae562f454690be120ea7da6a2f",
+      "https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=$apiKey",
     );
 
     final response = await http.get(url);

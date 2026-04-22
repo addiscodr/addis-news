@@ -1,28 +1,30 @@
 import 'dart:convert';
 import 'package:addis_news/models/article_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class News {
   List<ArticleModel> news = [];
+  final String? apiKey = dotenv.env['NEWS_API_KEY'];
 
   // Fetch general news (default)
   Future<void> getNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/top-headlines?q=tesla&sortBy=publishedAt&apiKey=3ef354ae562f454690be120ea7da6a2f",
+      "https://newsapi.org/v2/top-headlines?q=tesla&sortBy=publishedAt&apiKey=$apiKey",
     );
   }
 
   // Fetch Breaking News
   Future<void> getBreakingNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=3ef354ae562f454690be120ea7da6a2f",
+      "https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=$apiKey",
     );
   }
 
   // Fetch Trending News
   Future<void> getTrendingNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&apiKey=3ef354ae562f454690be120ea7da6a2f",
+      "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&apiKey=$apiKey",
     );
   }
 
