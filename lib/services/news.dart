@@ -10,7 +10,7 @@ class News {
   // Fetch general news (default)
   Future<void> getNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/everything?q=tesla&from=2026-03-22&sortBy=publishedAt&apiKey=$apiKey",
+      "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=$apiKey",
     );
   }
 
@@ -24,7 +24,7 @@ class News {
   // Fetch Trending News
   Future<void> getTrendingNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&apiKey=$apiKey",
+      "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=$apiKey",
     );
   }
 
