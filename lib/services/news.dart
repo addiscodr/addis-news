@@ -10,7 +10,7 @@ class News {
   // Fetch general news (default)
   Future<void> getNews() async {
     await _fetchNewsFromUrl(
-      "https://newsapi.org/v2/top-headlines?q=tesla&sortBy=publishedAt&apiKey=$apiKey",
+      "https://newsapi.org/v2/everything?q=tesla&from=2026-03-22&sortBy=publishedAt&apiKey=$apiKey",
     );
   }
 
