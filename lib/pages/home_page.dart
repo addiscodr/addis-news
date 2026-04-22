@@ -1,6 +1,7 @@
 import 'package:addis_news/models/article_model.dart';
 import 'package:addis_news/models/category_model.dart';
 import 'package:addis_news/models/slider_model.dart';
+import 'package:addis_news/pages/all_news.dart';
 import 'package:addis_news/pages/blog_tile.dart';
 import 'package:addis_news/pages/category_news.dart';
 import 'package:addis_news/pages/category_tile.dart';
@@ -54,14 +55,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // 1. Flutter handles the back arrow automatically, but we can customize it:
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        // 2. This is the "magic" property that forces the title to center
+        // regardless of the size of the leading or trailing icons.
+        centerTitle: true,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min, // Constrains the row to its content
           children: [
-            const Text("ADDIS"),
+            const Text(
+              "ADDIS",
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            
             const Text(
               "NEWS",
               style: TextStyle(
-                color: Colors.redAccent,
+                fontSize: 22,
+                color: Colors.blueAccent,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -119,12 +139,24 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 18,
                           ),
                         ),
-                        const Text(
-                          "View All",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        // Breaking News
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AllNews(type: "breaking"),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "View All",
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ],
@@ -168,12 +200,24 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 18,
                           ),
                         ),
-                        const Text(
-                          "View All",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        // Trending News
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AllNews(type: "trending"),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "View All",
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ],

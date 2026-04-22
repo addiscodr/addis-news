@@ -24,14 +24,33 @@ class _ArticleViewState extends State<ArticleView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // 1. Flutter handles the back arrow automatically, but we can customize it:
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        // 2. This is the "magic" property that forces the title to center
+        // regardless of the size of the leading or trailing icons.
+        centerTitle: true,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min, // Constrains the row to its content
           children: [
-            const Text("ADDIS"),
+            const Text(
+              "ADDIS",
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            
             const Text(
               "NEWS",
               style: TextStyle(
-                color: Colors.redAccent,
+                fontSize: 22,
+                color: Colors.blueAccent,
                 fontWeight: FontWeight.bold,
               ),
             ),

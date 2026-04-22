@@ -6,11 +6,13 @@ class ShowCategory extends StatelessWidget {
   String image;
   String description;
   String title;
+  String url;
   ShowCategory({
     super.key,
     required this.image,
     required this.description,
     required this.title,
+    required this.url,
   });
 
   @override

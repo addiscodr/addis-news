@@ -54,7 +54,7 @@ class _LandingPageState extends State<LandingPage> {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 18),
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Center(
